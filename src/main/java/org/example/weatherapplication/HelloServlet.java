@@ -34,7 +34,7 @@
             }
             scanner.close();
 
-//            very lengthy process to convert into json and then extract the single details.
+//            converting into json to extract the detail .
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
             JsonObject location = jsonObject.getAsJsonObject("location"); //extract location related detail
