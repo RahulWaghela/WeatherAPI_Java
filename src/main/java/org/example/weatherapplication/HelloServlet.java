@@ -33,23 +33,21 @@
                 response.append(scanner.nextLine());
             }
             scanner.close();
-    
-            // Parse the JSON response using Gson
+
+//            very lengthy process to convert into json and then extract the single details.
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(response.toString(), JsonObject.class);
-            JsonObject location = jsonObject.getAsJsonObject("location");
+            JsonObject location = jsonObject.getAsJsonObject("location"); //extract location related detail
             JsonObject current = jsonObject.getAsJsonObject("current");
 
-            // Extract individual details
             String country = location.get("country").getAsString();
             String region = location.get("region").getAsString();
-            String cityName = location.get("name").getAsString(); // Using "name" for city
+            String cityName = location.get("name").getAsString();
             String localtime = location.get("localtime").getAsString();
             double temperature = current.get("temp_c").getAsDouble();
             double humidity = current.get("humidity").getAsDouble();
             String lastUpdated = current.get("last_updated").getAsString();
 
-            // Optionally, extract more details if available
             double pressureMb = current.has("pressure_mb") ? current.get("pressure_mb").getAsDouble() : 0.0;
             String windDir = current.has("wind_dir") ? current.get("wind_dir").getAsString() : "N/A";
             String airQuality = current.has("air_quality") ? current.getAsJsonObject("air_quality").toString() : "N/A";
